@@ -262,7 +262,7 @@ Library.ShowCustomCursor = true -- Toggles the Linoria cursor globaly (Default v
 Library.NotifySide = "Left" -- Changes the side of the notifications globaly (Left, Right) (Default value = Left)
 
 local Window = Library:CreateWindow({
-	Title = 'FishhCheat v2',
+	Title = 'XATAGAY PASTER V40',
 	Center = true,
 	AutoShow = true,
 	Resizable = true,
@@ -386,7 +386,7 @@ GB_WeaponMods:AddToggle('NoSpread', { Text = 'No Spread', Default = false, Toolt
 --GB_WeaponMods:AddToggle('InfDamage', { Text = 'Infinite Damage', Default = false, Tooltip = 'All weapons insta-kill'})
 GB_WeaponMods:AddToggle('InfAmmo', { Text = 'Infinite Ammo', Default = false, Tooltip = 'Infinite ammo on all weapons'})
 GB_WeaponMods:AddToggle('InfCloak', { Text = 'Infinite Cloak', Default = false, Tooltip = 'Infinite cloak for Agent'})
---GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
+GB_WeaponMods:AddToggle('InfCharge', { Text = 'Infinite Shield Charge', Default = false, Tooltip = 'Infinite charge for Annihilator shields'}) -- Possibly detected
 GB_WeaponMods:AddToggle('MaxBuildings', { Text = 'Instant LVL 3 Buildings', Default = false, Tooltip = "Mechanic buildings will instantly be lvl 3 once deployed"})
 --[[GB_WeaponMods:AddToggle('FirerateChanger', { Text = 'Firerate Modifier', Default = false, Tooltip = 'Modify the firerate of most weapons'})
 GB_WeaponMods:AddSlider('FirerateAmount', {Text = 'Firerate', Default = 0.2, Min = 0.1, Max = 1, Rounding = 2, Compact = true})
@@ -440,7 +440,7 @@ LegacyLocalVariables.cloakleft:GetPropertyChangedSignal('Value'):Connect(functio
         LegacyLocalVariables.cloakleft.Value = 10
     end
 end)
---[[
+
 LegacyLocalVariables.chargeleft:GetPropertyChangedSignal('Value'):Connect(function()
     if Toggles.InfCharge.Value then
 		if LegacyLocalVariables.Held2.Value then
@@ -456,7 +456,7 @@ LegacyLocalVariables.Held2:GetPropertyChangedSignal("Value"):Connect(function() 
 		LegacyLocalVariables.chargeleft.Value = 100
 	end
 end)
-]]
+
 
 local GB_Auto = Tabs.Automation:AddLeftGroupbox('Automation') 
 GB_Auto:AddToggle('AutoUber', { Text = 'Auto Uber', Default = false, Tooltip = 'Automatically uber when under health %'})
