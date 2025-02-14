@@ -629,7 +629,7 @@ local WatermarkConnection = RunService.RenderStepped:Connect(function()
 		FrameCounter = 0;
 	end;
 	if WatermarkVisible then
-		Library:SetWatermark(('FishhCheat v2 | %s fps | %s ms'):format(
+		Library:SetWatermark(('SKIBIDICHEAT | %s fps | %s ms'):format(
 			math.floor(FPS),
 			math.floor(Ping)
 		));
@@ -652,7 +652,7 @@ MenuGroup:AddButton('Unload', function() Library:Unload() end)
 MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'RightShift', NoUI = true, Text = 'Menu keybind' })
 MenuGroup:AddToggle("ShowWatermark", {
 	Text = "Show Cheat Watermark",
-	Default = true, 
+	Default = true,
 	Tooltip = "Shows the cheat watermark. Duh", 
 	Callback = function(Value)
 		WatermarkVisible = Value
@@ -661,7 +661,7 @@ MenuGroup:AddToggle("ShowWatermark", {
 })
 MenuGroup:AddToggle("ShowKeybinds", {
 	Text = "Show Keybinds Menu",
-	Default = false, 
+	Default = false,
 	Tooltip = "Shows a menu with all keybinds", 
 	Callback = function(Value)
 		Library.KeybindFrame.Visible = Value
