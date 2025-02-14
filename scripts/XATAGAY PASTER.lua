@@ -293,7 +293,7 @@ GB_Aimbot:AddSlider('AimbotFOV', {Text = 'FOV', Default = 60, Min = 1, Max = 90,
 GB_Aimbot:AddToggle('AimbotShowFOV', { Text = 'Show FOV Circle', Default = false, Tooltip = 'Draw FOV Circle on screen'})
 --GB_Aimbot:AddDivider() -- FINISH THIS!
 --GB_Aimbot:AddToggle('AimbotLegitMelee', { Text = 'Legit Melee', Default = true, Tooltip = 'Enable distance check for melee'})
-GB_Aimbot:AddLabel('Fishhcheat is a free script available only on GitHub and v3rmillion. Do not use any other links!\nMade by FishhHvH', true)
+GB_Aimbot:AddLabel('sigma bot is a song made by people', true)
 
 local GB_Hitbox = Tabs.Aim:AddRightGroupbox('Hitbox')
 GB_Hitbox:AddToggle('HBEToggle', { Text = 'Hitbox Expander', Default = false, Tooltip = 'Toggle hitbox expanding'}):AddKeyPicker('HBEBind', { Default = 'None', NoUI = false, Mode = 'Always', Text = 'HBE Key' })
@@ -661,7 +661,7 @@ MenuGroup:AddToggle("ShowWatermark", {
 })
 MenuGroup:AddToggle("ShowKeybinds", {
 	Text = "Show Keybinds Menu",
-	Default = true, 
+	Default = false, 
 	Tooltip = "Shows a menu with all keybinds", 
 	Callback = function(Value)
 		Library.KeybindFrame.Visible = Value
