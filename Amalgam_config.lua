@@ -58,8 +58,8 @@ FOVCircle.Color = Color3.new(255,255,255)
 FOVCircle.Thickness = 1
 FOVCircle.Filled = false
 
---RepStorage.VIPSettings.NoTeamLimits.Value = true
---RepStorage.VIPSettings.EnabledSpectator.Value = true
+RepStorage.VIPSettings.NoTeamLimits.Value = true
+RepStorage.VIPSettings.EnabledSpectator.Value = true
 RepStorage.VIPSettings.NoVoiceCooldown.Value = true
 
 if not Lighting:FindFirstChild('ColorCorrection') then
@@ -260,37 +260,45 @@ RemoveShit = nil
 
 local repo = 'https://raw.githubusercontent.com/mstudio45/LinoriaLib/refs/heads/main/'
 
-local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
-local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
-local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
-local Options = getgenv().Linoria.Options
-local Toggles = getgenv().Linoria.Toggles
+local repo = "https://raw.githubusercontent.com/deividcomsono/Obsidian/main/"
+local Library = loadstring(game:HttpGet(repo .. "Library.lua"))()
+local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
+local SaveManager = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
 
+local Options = Library.Options
+local Toggles = Library.Toggles
+
+Library.ForceCheckbox = false -- Forces AddToggle to AddCheckbox
 Library.ShowToggleFrameInKeybinds = true -- Make toggle keybinds work inside the keybinds UI (aka adds a toggle to the UI). Good for mobile users (Default value = true)
-Library.ShowCustomCursor = true -- Toggles the Linoria cursor globaly (Default value = true)
-Library.NotifySide = "Left" -- Changes the side of the notifications globaly (Left, Right) (Default value = Left)
 
 local Window = Library:CreateWindow({
-	Title = 'FishhCheat v2 (Solara)',
-	Center = true,
-	AutoShow = true,
-	Resizable = true,
-	ShowCustomCursor = true,
+	-- Set Center to true if you want the menu to appear in the center
+	-- Set AutoShow to true if you want the menu to appear when it is created
+	-- Set Resizable to true if you want to have in-game resizable Window
+	-- Set MobileButtonsSide to "Left" or "Right" if you want the ui toggle & lock buttons to be on the left or right side of the window
+	-- Set ShowCustomCursor to false if you don't want to use the Linoria cursor
+	-- NotifySide = Changes the side of the notifications (Left, Right) (Default value = Left)
+	-- Position and Size are also valid options here
+	-- but you do not need to define them unless you are changing them :)
+
+	Title = "Amalgam",
+	Footer = "version: 1",
+	Icon = 0,
 	NotifySide = "Left",
-	TabPadding = 8,
-	MenuFadeTime = 0.2
+	ShowCustomCursor = true,
 })
 
 local Tabs = {
-	Aim = Window:AddTab('Aim'),
-	Visuals = Window:AddTab('Visuals'),
-    Mods = Window:AddTab('Mods'),
-	Automation = Window:AddTab('Automation'),
-	Misc = Window:AddTab('Misc'),
-	['UI Settings'] = Window:AddTab('UI Settings'),
+	-- Creates a new tab titled Main
+	Main = Window:AddTab("Aim", "i dont know"),
+	ESP = Window:AddTab("Esp", "Extra Sensory pedo"),
+	Mods = Window:AddTab("Mods", "Mods"),
+	Automation = Window:AddTab("Automation", "automatically do shit for you"),
+	Misc = Window:AddTab("Misc", "i dont know what to put here"),
+	['UI Settings'] = Window:AddTab("UI Settings", "settings"),
 }
 
-local GB_Aimbot = Tabs.Aim:AddLeftGroupbox('Aimbot')
+local GB_Aimbot = Tabs.Main:AddLeftGroupbox("Aimbot")
 GB_Aimbot:AddToggle('AimbotToggle', { Text = 'Aimbot', Default = true, Tooltip = 'Aims at enemies'}):AddKeyPicker('AimbotBind', { Default = 'LeftShift', NoUI = false, Mode = 'Hold', Text = 'Aimkey' })
 GB_Aimbot:AddToggle('ProjAimbotToggle', { Text = 'Projectile Aimbot (BETA)', Default = true, Tooltip = '*Attempts* to predict player movement for projectile weapons\nUse hitbox expander for grenade launchers.'})
 GB_Aimbot:AddToggle('Wallcheck', { Text = 'Wallcheck', Default = false, Tooltip = 'Raycasts dont work properly on Solara, toggled off by default.'})
@@ -317,9 +325,9 @@ GB_Ignore:AddToggle('AimIgnoreInvis', {Text = 'Ignore Invisible', Default = true
 GB_Ignore:AddToggle('AimIgnoreFriends', {Text = 'Ignore Friends/Ignored', Default = true, Tooltip = '(applies for both HBE and aimbot)'})
 
 
-local GB_ESP = Tabs.Visuals:AddLeftGroupbox('ESP')
-local GB_View = Tabs.Visuals:AddRightGroupbox('View')
-local GB_World = Tabs.Visuals:AddRightGroupbox('World')
+local GB_ESP = Tabs.ESP:AddLeftGroupbox('ESP')
+local GB_View = Tabs.ESP:AddRightGroupbox('View')
+local GB_World = Tabs.ESP:AddRightGroupbox('World')
 GB_ESP:AddToggle('BoundingBox', { Text = 'Box', Default = false, Tooltip = 'Draws boxes around players'}):AddColorPicker('BoundingBoxDefaultColor', {Default = Color3.fromRGB(255, 255, 255), Transparency = nil, Title = 'Box Color'})
 GB_ESP:AddToggle('BoxTeamCheck', { Text = 'Team Check', Default = false, Tooltip = 'Teamcheck for boxes'}):AddColorPicker('RedBoxColor', {Default = Color3.fromRGB(224, 64, 62), Transparency = nil, Title = 'Enemy Box Color'}):AddColorPicker('GreenBoxColor', {Default = Color3.fromRGB(74, 172, 40), Transparency = nil, Title = 'Friendly Box Color'})
 GB_ESP:AddSlider('BoxFillTransparency', {Text = 'Transparency', Default = 0.2, Min = 0, Max = 1, Rounding = 2, Compact = true})
@@ -715,30 +723,7 @@ task.spawn(function()
 	end
 end)
 
-Library:SetWatermarkVisibility(true)
 
-local FrameTimer = tick()
-local FrameCounter = 0;
-local FPS = 60;
-
-local Stats = game:GetService('Stats')
-
-local WatermarkConnection = RunService.RenderStepped:Connect(function()
-	FrameCounter = FrameCounter + 1; -- cuz of moonsec being retarded
-	Ping = Stats.Network.ServerStatsItem['Data Ping']:GetValue()
-
-	if (tick() - FrameTimer) >= 1 then
-		FPS = FrameCounter;
-		FrameTimer = tick();
-		FrameCounter = 0;
-	end;
-	if WatermarkVisible then
-		Library:SetWatermark(('FishhCheat v2 | %s fps | %s ms'):format(
-			math.floor(FPS),
-			math.floor(Ping)
-		));
-	end
-end);
 
 Library.KeybindFrame.Visible = true;
 
@@ -752,21 +737,12 @@ local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
 
 MenuGroup:AddButton('Unload', function() Library:Unload() end)
 MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'RightShift', NoUI = true, Text = 'Menu keybind' })
-MenuGroup:AddToggle("ShowWatermark", {
-	Text = "Show Cheat Watermark",
-	Default = true, 
-	Tooltip = "Shows the cheat watermark. Duh", 
-	Callback = function(Value)
-		WatermarkVisible = Value
-		Library:SetWatermarkVisibility(Value)
-	end
-})
 MenuGroup:AddToggle("ShowKeybinds", {
 	Text = "Show Keybinds Menu",
 	Default = true, 
 	Tooltip = "Shows a menu with all keybinds", 
 	Callback = function(Value)
-		Library.KeybindFrame.Visible = Value
+					Library.KeybindFrame.Visible = Value
 	end
 })
 
