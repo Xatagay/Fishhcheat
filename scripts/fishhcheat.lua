@@ -10,8 +10,7 @@ Github is really retarded so the code looks weird with random spaces... idk why 
 
 ]]
 
---sigma anticheat bypass
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f1fde88a51d2fc5fad5548db80a256c2.lua"))()
+-
 
 repeat task.wait() until game:IsLoaded()
 
@@ -1698,3 +1697,4 @@ index = hookmetamethod(game, "__index", newcclosure(function(self, key)
 end))
 
 Library:Notify("Welcome, " .. LocalPlayer.DisplayName)
+
